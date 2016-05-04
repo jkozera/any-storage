@@ -1,6 +1,6 @@
 {
   "name": "any-storage",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Use any possible storage mechanism available asynchronously",
   "main": "index.js",
   "scripts": {
