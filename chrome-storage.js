@@ -1,7 +1,8 @@
 
 module.exports = {
   get: getItem,
-  set: setItem
+  set: setItem,
+  removeItem: removeItem
 };
 
 var chrome = require('global/window').chrome;
@@ -25,9 +26,9 @@ function setItem (key, value, callback) {
   });
 }
 
-// function removeItem (key) {
-//   chrome.storage.local.remove(key);
-// }
+function removeItem (key, cb) {
+  chrome.storage.local.remove(key, cb);
+}
 
 // function getAllKeys (callback) {
 //   chrome.storage.local.get(null, function (obj) {

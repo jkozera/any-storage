@@ -7,20 +7,32 @@ module.exports = sugar;
 function sugar (root) {
   var api = {
     get: get,
-    set: set
+    set: set,
+    remove: remove
   };
 
+  if (!root.remove) {
+    remove.remove = fakeRemove;
+  }
+
   return api;
+
+  function fakeRemove (key, cb) {
+    root.set(key, null, cb);
+  }
 
   function get (key, cb) {
     if (!isFunction(cb)) {
       throw new Error('Must pass in a callback to storage.get');
     }
     if (Array.isArray(key)) {
-      var next = afterAll(function (result) {
+      var next = afterAll(function (err, result) {
+        if (err) {
+          return cb(err);
+        }
         // remove dummy entry from the synchronous check
         result.shift();
-        cb(result);
+        cb(null, result);
       });
       var start = next();
       key.forEach(function (k) {
@@ -58,6 +70,28 @@ function sugar (root) {
     }
 
     return root.set(key, value, cb);
+  }
+
+  function remove (key, cb) {
+    if (!isFunction(cb)) {
+      cb = noop;
+    }
+    if (Array.isArray(key)) {
+      var next = afterAll(function (err, result) {
+        if (err) {
+          return cb(err);
+        }
+        // remove dummy entry from the synchronous check
+        result.shift();
+        cb(null, result);
+      });
+      var start = next();
+      key.forEach(function (k) {
+        root.remove(k, next());
+      });
+      return start();
+    }
+    return root.remove(key, cb);
   }
 }
 
