@@ -1,5 +1,7 @@
-# any-storage
-Use any possible storage mechanism available asynchronously
+# any-storage [![Build Status](https://travis-ci.org/chrisinajar/any-storage.svg?branch=master)](https://travis-ci.org/chrisinajar/any-storage)
+Use any possible storage mechanism available asynchronously.
+
+Supports local storage, chrome storage, or in-memory storage.
 
 
 ## Installation
@@ -23,7 +25,7 @@ storage.set({
 // get
 storage.get('someKey', function (err, value) {
 });
-storage.get(['someKey', 'anotherKey], function (err, value) {
+storage.get(['someKey', 'anotherKey'], function (err, value) {
 });
 
 // remove
