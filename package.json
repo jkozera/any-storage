@@ -1,0 +1,40 @@
+{
+  "name": "any-storage",
+  "version": "0.0.0",
+  "description": "Use any possible storage mechanism available asynchronously",
+  "main": "index.js",
+  "scripts": {
+    "test": "semistandard && tape test.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisinajar/any-storage.git"
+  },
+  "keywords": [
+    "localstorage",
+    "chrome",
+    "storage",
+    "feature",
+    "browser"
+  ],
+  "author": "Chris Vickery <chrisinajar@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrisinajar/any-storage/issues"
+  },
+  "homepage": "https://github.com/chrisinajar/any-storage#readme",
+  "devDependencies": {
+    "semistandard": "^7.0.5",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.5.1"
+  },
+  "dependencies": {
+    "after-all-results": "^2.0.0",
+    "global": "^4.3.0",
+    "has-chrome-storage": "^0.1.0",
+    "has-local-storage": "^1.0.1",
+    "is-function": "^1.0.1",
+    "is-object": "^1.0.1",
+    "just-storage": "0.0.3"
+  }
+}
