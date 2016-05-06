@@ -4,7 +4,7 @@
   "description": "Use any possible storage mechanism available asynchronously",
   "main": "index.js",
   "scripts": {
-    "test": "semistandard && tape test.js | tap-spec"
+    "test": "semistandard && zuul -- test.js"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,8 @@
   "devDependencies": {
     "semistandard": "^7.0.5",
     "tap-spec": "^4.1.1",
-    "tape": "^4.5.1"
+    "tape": "^4.5.1",
+    "zuul": "^3.10.1"
   },
   "dependencies": {
     "after-all-results": "^2.0.0",

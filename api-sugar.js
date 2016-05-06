@@ -1,6 +1,6 @@
 var isFunction = require('is-function');
 var isObject = require('is-object');
-var afterAll = require('after-all-results');
+var afterAll = require('./plan-results');
 
 module.exports = sugar;
 
@@ -26,17 +26,14 @@ function sugar (root) {
       throw new Error('Must pass in a callback to storage.get');
     }
     if (Array.isArray(key)) {
-      var next = afterAll(function (err, result) {
+      var next = afterAll(key.length, function (err, result) {
         if (err) {
           return cb(err);
         }
-        // remove dummy entry from the synchronous check
-        result.shift();
         cb(null, result);
       });
-      var start = next();
       key.forEach(function (k) {
-        var innerCb = next();
+        var innerCb = next(k);
         root.get(k, function (err, value) {
           if (value === undefined) {
             value = null;
@@ -44,7 +41,7 @@ function sugar (root) {
           innerCb(err, value);
         });
       });
-      return start();
+      return;
     }
     return root.get(key, cb);
   }
@@ -56,12 +53,12 @@ function sugar (root) {
       cb = value;
       value = null;
 
-      var next = afterAll(cb);
-      var start = next();
-      Object.keys(key).forEach(function (k) {
-        root.set(k, key[k], next());
+      var keyArr = Object.keys(key);
+      var next = afterAll(keyArr.length, cb);
+      keyArr.forEach(function (k) {
+        root.set(k, key[k], next(k));
       });
-      return start();
+      return;
     }
 
     // callback is optional
@@ -77,19 +74,16 @@ function sugar (root) {
       cb = noop;
     }
     if (Array.isArray(key)) {
-      var next = afterAll(function (err, result) {
+      var next = afterAll(key.length, function (err, result) {
         if (err) {
           return cb(err);
         }
-        // remove dummy entry from the synchronous check
-        result.shift();
         cb(null, result);
       });
-      var start = next();
       key.forEach(function (k) {
-        root.remove(k, next());
+        root.remove(k, next(k));
       });
-      return start();
+      return;
     }
     return root.remove(key, cb);
   }

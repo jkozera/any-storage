@@ -6,8 +6,8 @@ module.exports = {
 };
 
 function get (key, cb) {
-  return cb(storage(key));
+  return cb(null, storage(key));
 }
 function set (key, value, cb) {
-  return cb(storage.set(key, value));
+  return cb(null, storage.set(key, value));
 }
