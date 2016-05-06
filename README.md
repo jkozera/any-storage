@@ -26,11 +26,13 @@ storage.set({
 storage.get('someKey', function (err, value) {
 });
 storage.get(['someKey', 'anotherKey'], function (err, value) {
+  // value => {someKey: data, anotherKey: otherData }
 });
 
 // remove
 storage.remove('someKey', function (err) {});
-storage.remove(['someKey', 'anotherKey'], function (err) {});
+storage.remove(['someKey', 'anotherKey'], function (err) {
+});
 ```
 
 
