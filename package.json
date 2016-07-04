@@ -4,7 +4,8 @@
   "description": "Use any possible storage mechanism available asynchronously",
   "main": "index.js",
   "scripts": {
-    "test": "semistandard && zuul -- test.js"
+    "test": "semistandard && zuul -- test.js",
+    "test-local": "semistandard && zuul --local -- test.js"
   },
   "repository": {
     "type": "git",

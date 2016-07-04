@@ -12,7 +12,7 @@ function sugar (root) {
   };
 
   if (!root.remove) {
-    remove.remove = fakeRemove;
+    root.remove = fakeRemove;
   }
 
   return api;
