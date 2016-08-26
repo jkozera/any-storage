@@ -2,7 +2,8 @@ var storage = require('just-storage');
 
 module.exports = {
   get: get,
-  set: set
+  set: set,
+  remove: remove
 };
 
 function get (key, cb) {
@@ -10,4 +11,8 @@ function get (key, cb) {
 }
 function set (key, value, cb) {
   return cb(null, storage.set(key, value));
+}
+function remove (key, cb) {
+  // just-storage removes the item when null is passed to set
+  return cb(null, storage.set(key, null));
 }
